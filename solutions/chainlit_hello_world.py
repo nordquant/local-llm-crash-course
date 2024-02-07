@@ -1,5 +1,6 @@
 from typing import List
 
+import chainlit as cl
 from ctransformers import AutoModelForCausalLM
 
 llm = AutoModelForCausalLM.from_pretrained(
@@ -17,6 +18,13 @@ def get_prompt(instruction: str, history: List[str] = None) -> str:
     return prompt
 
 
+@cl.on_message
+async def on_message(message: cl.Message):
+    response = f"Hello World! You just sent: {message.content}!"
+    await cl.Message(response).send()
+
+
+"""
 history = []
 
 question = "Which is the biggest city in India?"
@@ -33,3 +41,4 @@ prompt = get_prompt(question, history)
 for word in llm(prompt, stream=True):
     print(word, end="", flush=True)
 print()
+"""

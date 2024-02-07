@@ -12,7 +12,7 @@ def get_prompt(instruction: str) -> str:
     return prompt
 
 
-question = "Which is the biggest city in India?"
+question = "Which city is the capital of India?"
 prompt = get_prompt(question)
 for word in llm(prompt, stream=True):
     print(word, end="", flush=True)

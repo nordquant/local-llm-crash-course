@@ -1,8 +1,7 @@
 from typing import List
 
-from ctransformers import AutoModelForCausalLM
-
 import chainlit as cl
+from ctransformers import AutoModelForCausalLM
 
 
 def get_prompt(instruction: str, history: List[str]) -> str:

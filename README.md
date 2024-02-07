@@ -3,16 +3,15 @@
 ## The Orca Model's Model Card
 https://huggingface.co/zoltanctoth/orca_mini_3B-GGUF
 
-### 
+##  Installing `ctransformers` and Chainlit
+Just for reference. Remember, you don't need to do this as it's pre-installed in your Codepace.
 ```
-pip install ctransformers
+pip install ctransformers chainlit
 ```
 
-
-
-## To be organized
-https://huggingface.co/zoltanctoth/orca_mini_3B-GGUF
-https://medium.com/data-science-at-microsoft/how-large-language-models-work-91c362f5b78f
+## The Open Orca Dataset
 https://huggingface.co/datasets/Open-Orca/OpenOrca
-black formatter
-cache folder
+
+## Chainlit and Streamlit
+ * https://docs.chainlit.io/get-started/overview
+ * https://streamlit.io/

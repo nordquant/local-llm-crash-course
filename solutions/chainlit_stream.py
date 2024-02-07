@@ -1,10 +1,7 @@
 from typing import List
 
+import chainlit as cl
 from ctransformers import AutoModelForCausalLM
-
-llm = AutoModelForCausalLM.from_pretrained(
-    "zoltanctoth/orca_mini_3B-GGUF", model_file="orca-mini-3b.q4_0.gguf"
-)
 
 
 def get_prompt(instruction: str, history: List[str] = None) -> str:
@@ -17,19 +14,22 @@ def get_prompt(instruction: str, history: List[str] = None) -> str:
     return prompt
 
 
-history = []
+@cl.on_message
+async def on_message(message: cl.Message):
+    msg = cl.Message(content="")
+    await msg.send()
 
-question = "Which is the biggest city in India?"
-prompt = get_prompt(question)
-answer = ""
-for word in llm(prompt, stream=True):
-    print(word, end="", flush=True)
-    answer += word
-print()
-history.append(answer)
+    prompt = get_prompt(message.content)
+    for word in llm(prompt, stream=True):
+        await msg.stream_token(word)
+    await msg.update()
 
-question = "Which is capital?"
-prompt = get_prompt(question, history)
-for word in llm(prompt, stream=True):
-    print(word, end="", flush=True)
-print()
+
+@cl.on_chat_start
+async def on_chat_start():
+    global llm
+
+    llm = AutoModelForCausalLM.from_pretrained(
+        "zoltanctoth/orca_mini_3B-GGUF", model_file="orca-mini-3b.q4_0.gguf"
+    )
+    await cl.Message("Model initialized. How can I help you?").send()

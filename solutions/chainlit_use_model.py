@@ -1,10 +1,7 @@
 from typing import List
 
+import chainlit as cl
 from ctransformers import AutoModelForCausalLM
-
-llm = AutoModelForCausalLM.from_pretrained(
-    "zoltanctoth/orca_mini_3B-GGUF", model_file="orca-mini-3b.q4_0.gguf"
-)
 
 
 def get_prompt(instruction: str, history: List[str] = None) -> str:
@@ -13,10 +10,27 @@ def get_prompt(instruction: str, history: List[str] = None) -> str:
     if history is not None:
         prompt += f"This is the conversation history: {''.join(history)}. Now answer the question: "
     prompt += f"{instruction}\n\n### Response:\n"
-    print(f"Prompt created: {prompt}")
     return prompt
 
 
+@cl.on_message
+async def on_message(message: cl.Message):
+    prompt = get_prompt(message.content)
+    response = llm(prompt)
+    await cl.Message(response).send()
+
+
+@cl.on_chat_start
+async def on_chat_start():
+    global llm
+
+    llm = AutoModelForCausalLM.from_pretrained(
+        "zoltanctoth/orca_mini_3B-GGUF", model_file="orca-mini-3b.q4_0.gguf"
+    )
+    await cl.Message("Model initialized. How can I help you?").send()
+
+
+"""
 history = []
 
 question = "Which is the biggest city in India?"
@@ -33,3 +47,4 @@ prompt = get_prompt(question, history)
 for word in llm(prompt, stream=True):
     print(word, end="", flush=True)
 print()
+"""
