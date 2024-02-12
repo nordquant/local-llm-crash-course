@@ -1,10 +1,8 @@
-from typing import List
-
 import chainlit as cl
 from ctransformers import AutoModelForCausalLM
 
 
-def get_prompt(instruction: str, history: List[str] = None) -> str:
+def get_prompt(instruction: str, history: list[str] | None = None) -> str:
     system = "You are an AI assistant that gives helpful answers. You answer the question in a short and concise way."
     prompt = f"### System:\n{system}\n\n### User:\n"
     if history is not None:
