@@ -25,7 +25,7 @@ async def on_message(message: cl.Message):
 """
 history = []
 
-question = "Which is the biggest city in India?"
+question = "Which city is the capital of India?"
 prompt = get_prompt(question)
 answer = ""
 for word in llm(prompt, stream=True):
@@ -34,7 +34,7 @@ for word in llm(prompt, stream=True):
 print()
 history.append(answer)
 
-question = "Which is capital?"
+question = "And of the United States?"
 prompt = get_prompt(question, history)
 for word in llm(prompt, stream=True):
     print(word, end="", flush=True)
