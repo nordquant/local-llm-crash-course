@@ -3,6 +3,9 @@ This is the courseware and Codespace for the [The Local LLM Crash Course - Build
 
 # Course Resources
 
+### Codespaces Pricing and Free Credits
+https://docs.github.com/en/billing/managing-billing-for-github-codespaces/about-billing-for-github-codespaces
+
 ### Hugging Face
 * The Orca Model's Model Card: https://huggingface.co/zoltanctoth/orca_mini_3B-GGUF
 
