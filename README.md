@@ -10,7 +10,7 @@ https://docs.github.com/en/billing/managing-billing-for-github-codespaces/about-
 * The Orca Model's Model Card: https://huggingface.co/zoltanctoth/orca_mini_3B-GGUF
 
 ###  Installing `ctransformers` and Chainlit
-Just for reference. Remember, you don't need to do this as it's pre-installed in your Codepace.
+Just for reference. Remember, you don't need to do this as it's pre-installed in your Codespace.
 ```
 pip install ctransformers chainlit
 ```
