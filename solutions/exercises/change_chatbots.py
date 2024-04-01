@@ -4,7 +4,7 @@ import chainlit as cl
 from ctransformers import AutoModelForCausalLM
 
 
-def get_prompt(instruction: str, history: List[str] = None) -> str:
+def get_prompt_orca(instruction: str, history: List[str] = None) -> str:
     system = "You are an AI assistant that gives helpful answers. You answer the question in a short and concise way."
     prompt = f"### System:\n{system}\n\n### User:\n"
     if history is not None:
@@ -12,19 +12,31 @@ def get_prompt(instruction: str, history: List[str] = None) -> str:
     prompt += f"{instruction}\n\n### Response:\n"
     print(f"Prompt created: {prompt}")
     return prompt
-
-
+ 
+ 
+def get_prompt_llama2(instruction: str, history: List[str] = None) -> str:
+    system = "You are an AI assistant that gives helpful answers. You answer the question in a short and concise way."
+    prompt = f"<s>[INST] <<SYS>>\n{system}\n<</SYS>>\n\n"
+    if history is not None:
+        prompt += f"This is the conversation history: {''.join(history)}. Now answer the question: "
+    prompt += f"{instruction} [/INST]"
+    print(f"Prompt created: {prompt}")
+    return prompt
+ 
+ 
 def select_llm(llm_name: str):
-    global llm
+    global llm, get_prompt
     if llm_name == "llama2":
         llm = AutoModelForCausalLM.from_pretrained(
             "TheBloke/Llama-2-7b-Chat-GGUF", model_file="llama-2-7b-chat.Q5_K_M.gguf"
         )
+        get_prompt = get_prompt_llama2
         return "Model changed to Llama"
     elif llm_name == "orca":
         llm = AutoModelForCausalLM.from_pretrained(
             "zoltanctoth/orca_mini_3B-GGUF", model_file="orca-mini-3b.q4_0.gguf"
         )
+        get_prompt = get_prompt_orca
         return "Model changed to Orca"
     else:
         return "Model not found, keeping old model"
