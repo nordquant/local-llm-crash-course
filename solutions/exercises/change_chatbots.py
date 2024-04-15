@@ -12,8 +12,8 @@ def get_prompt_orca(instruction: str, history: List[str] = None) -> str:
     prompt += f"{instruction}\n\n### Response:\n"
     print(f"Prompt created: {prompt}")
     return prompt
- 
- 
+
+
 def get_prompt_llama2(instruction: str, history: List[str] = None) -> str:
     system = "You are an AI assistant that gives helpful answers. You answer the question in a short and concise way."
     prompt = f"<s>[INST] <<SYS>>\n{system}\n<</SYS>>\n\n"
@@ -22,8 +22,8 @@ def get_prompt_llama2(instruction: str, history: List[str] = None) -> str:
     prompt += f"{instruction} [/INST]"
     print(f"Prompt created: {prompt}")
     return prompt
- 
- 
+
+
 def select_llm(llm_name: str):
     global llm, get_prompt
     if llm_name == "llama2":
