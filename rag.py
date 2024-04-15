@@ -9,7 +9,13 @@ llm = CTransformers(
     model="TheBloke/Llama-2-7B-Chat-GGUF",
     model_file="llama-2-7b-chat.Q2_K.gguf",
     model_type="llama2",
-    config={"max_new_tokens": 20000, "temperature": 0.01, "context_length": 2000},
+    config={
+        "max_new_tokens": 2000,
+        "temperature": 0.01,
+        "context_length": 2000,
+        "threads": 8,
+        "gpu_layers": 1,
+    },
 )
 
 # Set up a prompt template
@@ -43,7 +49,6 @@ context = format_docs(retriever.invoke(question))
 
 prompt = prompt_template.format(context=context, question=question)
 print(f"PROMPT:\n{prompt}\n\nANSWER:")
-print()
 
 for chunk in llm.stream(prompt):
     print(chunk, end="", flush=True)
