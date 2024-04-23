@@ -21,3 +21,11 @@ The dataset on Hugging Face: https://huggingface.co/datasets/Open-Orca/OpenOrca
 ## Chainlit and Streamlit
  * Chainlit: https://docs.chainlit.io/get-started/overview
  * Streamlit: https://streamlit.io/
+
+## LangChain
+
+### Installation
+```
+pip install langchain langchain-community
+```
+
