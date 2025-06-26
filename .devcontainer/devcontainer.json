@@ -5,10 +5,10 @@
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
 	"image": "mcr.microsoft.com/devcontainers/python:1-3.11-bullseye",
 	"features": {
-		"ghcr.io/devcontainers-contrib/features/black:2": {
+		"ghcr.io/devcontainers-extra/features/black:2": {
 			"version": "latest"
 		},
-		"ghcr.io/devcontainers-contrib/features/flake8:2": {
+		"ghcr.io/devcontainers-extra/features/flake8:2": {
 			"version": "latest",
 			"plugins": "flake8-black"
 		}
@@ -22,6 +22,7 @@
 				"GitHub.codespaces",
 				"GitHub.github-vscode-theme",
 				"GitHub.vscode-pull-request-github",
+				"ms-python.black-formatter",
 				"ms-python.debugpy",
 				"ms-python.flake8",
 				"ms-python.python",
